@@ -22,7 +22,22 @@ export const productReducer=(state=initialState,action)=>{
 
                 }
         };
-    
+      case "FETCH_CATEGORIES":
+            
+        return{
+                ...state,
+                categories:action.payload,
+                 pagination:{
+                    ...state.pagination,
+                pageNumber: action.pageNumber,
+                pageSize: action.pageSize,
+                totalElements: action.totalElements,
+                totalPage: action.totalPage,
+                lastPage: action.lastPage
+
+                }
+         }
+        ;
         default:
             return state;
     }

@@ -4,15 +4,7 @@ import { FiArrowDown, FiArrowUp, FiRefreshCw, FiSearch } from "react-icons/fi";
 import { Button, FormControl, InputLabel, MenuItem, Select, Tooltip } from '@mui/material';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-function Filter() {
-
-    const categories=[
-        {categoryId:1,categoryName:"Books"},
-        {categoryId:2,categoryName:"Electronics"},
-       { categoryId:3,categoryName:"Toys"},
-        {categoryId:4,categoryName:"Furniture"}
-    ];
-
+function Filter({categories}) {
 
     const [searchParams] = useSearchParams();
      const params=new URLSearchParams(searchParams)
