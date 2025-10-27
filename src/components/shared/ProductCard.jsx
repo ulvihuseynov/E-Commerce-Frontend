@@ -4,7 +4,7 @@ import ProductViewModal from './ProductViewModal';
 import { truncateText } from '../../utils/truncateText.js';
 
 function ProductCard({ productId,productName, image,description,
-                       quantity,  price,  discount,  specialPrice}) {
+                       quantity,  price,  discount,  specialPrice,about=false}) {
 
                         
   const [openProductViewModal,setOpenProductViewModal]=useState(false);
@@ -14,9 +14,11 @@ function ProductCard({ productId,productName, image,description,
   const isAvailable=quantity && Number(quantity) >0;
 
   const handleProductView=(product)=>{
-
-    setSelectedViewModal(product);
+if (!about) {
+  setSelectedViewModal(product);
     setOpenProductViewModal(true)
+}
+    
   }
   return (
     <div className='border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300 '>
@@ -40,7 +42,8 @@ function ProductCard({ productId,productName, image,description,
           <p className='text-gray-600 text-sm'>{truncateText(description,70)}</p>
         </div>
 
-    <div className='flex items-center justify-between'>
+          {!about && (
+            <div className='flex items-center justify-between'>
          {
         specialPrice ? (
            <div className='flex flex-col'>
@@ -62,6 +65,7 @@ function ProductCard({ productId,productName, image,description,
         {isAvailable ? "Add to cart" : "Stock out"}
        </button>
     </div>
+          )}
      </div>
      <ProductViewModal 
      openModal={openProductViewModal}
