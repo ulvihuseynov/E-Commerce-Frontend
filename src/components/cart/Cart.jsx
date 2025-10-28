@@ -1,8 +1,14 @@
 import React from 'react'
-import { MdShoppingCart } from 'react-icons/md'
+import { MdArrowBack, MdShoppingCart } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import ItemContent from './ItemContent';
 
 function Cart() {
+  const dispatch=useDispatch();
+  const {cart}=useSelector(state=>state.carts);
+  const newCart={...cart};
+  newCart.totalPrice=cart.reduce((acc,cur)=>acc * Number(cur?.specialPrice)*Number(cur?.quantity),0)
   return (
     <div className='lg:px-14 sm:px-8 px-4 py-10'>
       <div className='flex flex-col items-center mb-12'>
@@ -20,7 +26,17 @@ function Cart() {
         
 
       </div>
+      <div >
+        {
+          cart && cart.length > 0 && cart.map(item=>(
+           
+            <ItemContent key={item.productId} {...item}/>
+            
+          ))
+        }
+      </div>
       <div className='border-t-[1.5px] border-slate-700 py-4 flex sm:flex-row flex-col sm:px-0 px-2 sm:justify-between gap-4'>
+        
             <div></div>
             <div className='flex text-sm gap-1 flex-col'>
                
@@ -34,8 +50,14 @@ function Cart() {
                 <Link className="w-full justify-end flex" to="/checkout">
                 <button
                 onClick={()=>{}}
-                className='font-semibold w-[300px] py-2 px-4 rounded-sm bg-custom-blue text-white flex items-center justify-center gap-2'
-                >Checkout</button>
+                className='font-semibold w-[300px] py-2 px-4 rounded-sm bg-custom-blue text-white flex items-center justify-center gap-2 hover:text-gray-300 trasnsition duration-500'
+                >
+                  <MdShoppingCart size={20}/>
+                  Checkout</button>
+                </Link>
+                <Link className='flex items-center gap-2 mt-2 text-slate-500' to="/products">
+                <MdArrowBack/>
+                <span>Continue Shopping</span>
                 </Link>
             </div>
       </div>
