@@ -4,8 +4,11 @@ import { FaShoppingCart, FaSignInAlt, FaStore } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import { IoIosMenu } from "react-icons/io";
+import { useSelector } from 'react-redux';
 function Navbar() {
     const path=useLocation().pathname;
+    const {products}=useSelector(state=>state.products)
+    console.log(products.find(item=>item.quantity))
     const [navbarOpen,setNavbarOpen]=useState(false)
   return (
     <div className='h-[70px] bg-custom-gradient flex items-center text-white z-50 sticky top-0'>
