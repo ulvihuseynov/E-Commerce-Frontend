@@ -7,8 +7,7 @@ import { IoIosMenu } from "react-icons/io";
 import { useSelector } from 'react-redux';
 function Navbar() {
     const path=useLocation().pathname;
-    const {products}=useSelector(state=>state.products)
-    console.log(products.find(item=>item.quantity))
+    const {cart}=useSelector(state=>state.carts)
     const [navbarOpen,setNavbarOpen]=useState(false)
   return (
     <div className='h-[70px] bg-custom-gradient flex items-center text-white z-50 sticky top-0'>
@@ -42,7 +41,7 @@ function Navbar() {
             ${path==='/cart' ? 'text-white font-semibold':'text-gray-200'}`} to="/cart">
                 <Badge
                 showZero
-                badgeContent={0}
+                badgeContent={cart?.length||0}
                 color='primary'
                 overlap='circular'
                 anchorOrigin={{vertical:'top',horizontal:'right'}}>
