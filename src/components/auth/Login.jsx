@@ -3,13 +3,18 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom'
 import { IoMdLogIn } from "react-icons/io";
 import InputField from '../shared/InputField';
+import { useDispatch } from 'react-redux';
+import { authenticateSignInUser } from '../../store/actions';
+import toast from 'react-hot-toast';
 function Login() {
 
     const navigate=useNavigate();
+    const dispatch=useDispatch()
     const [loader,setLoader]=useState(false);
-    const{register,handleSubmit,formState:{errors}}=useForm({mode:"onTouched"})
+    const{register,handleSubmit,reset,formState:{errors}}=useForm({mode:"onTouched"})
     const loginHandler=async(data)=>{
             console.log("cliked")
+            dispatch(authenticateSignInUser(data,toast,reset,navigate,setLoader))
     }
   return (
     <div className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
@@ -28,7 +33,7 @@ function Login() {
                         <InputField
                         label="UserName"
                         required
-                        id="username"
+                        id="userName"
                         type="text"
                         message="*Username is required"
                         placeholder="Enter your username"
