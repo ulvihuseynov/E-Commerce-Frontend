@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { RxCross2 } from "react-icons/rx";
 import { IoIosMenu } from "react-icons/io";
 import { useSelector } from 'react-redux';
+import UserMenu from '../UserMenu';
 function Navbar() {
     const path=useLocation().pathname;
     const {cart}=useSelector(state=>state.carts)
@@ -53,7 +54,7 @@ function Navbar() {
                 
         </li>
         {(user && user.id) ? ( <li className='font-medium transition-all duration-150'>
-            <p>Welcome</p>
+            <UserMenu/>
         </li>)
         :(
             <li className='font-medium transition-all duration-150'>
