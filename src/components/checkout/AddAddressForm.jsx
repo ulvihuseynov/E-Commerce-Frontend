@@ -2,13 +2,19 @@ import React from 'react'
 import InputField from '../shared/InputField'
 import { useForm } from 'react-hook-form'
 import { FaAddressCard } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Spinners from '../shared/Spinners'
+import toast from 'react-hot-toast'
+import { addUpdateUserAddress } from '../../store/actions'
 
-function AddAddressForm() {
+function AddAddressForm({address,setOpenAddressModal}) {
+  const dispatch =useDispatch()
     const {btnLoader}=useSelector(state=>state.errors)
         const{register,handleSubmit,reset,formState:{errors}}=useForm({mode:"onTouched"})
        const onSaveAddressHandler=async(data)=>{
+        dispatch(addUpdateUserAddress(
+          data,toast,address?.addressId,setOpenAddressModal
+        ))
             console.log("cliked")
     }
   return (
@@ -16,16 +22,16 @@ function AddAddressForm() {
             <form 
             onSubmit={handleSubmit(onSaveAddressHandler)}
             className=''>
-                    <div className='flex  justify-center items-center mb-4 font-semibold text-2xl text-slate-800 py-2 px-4'>
+                    <div className='flex  justify-center items-center mb-2 font-semibold text-2xl text-slate-800 py-1 px-4'>
                            <FaAddressCard className='mr-2 text-2xl'/>
                            Add Address
                     </div>
-                    <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col gap-2'>
 
                         <InputField
                         label="Building Name"
                         required
-                        id="building"
+                        id="buildingName"
                         type="text"
                         message="*Building Name is required"
                         placeholder="Enter Building Name"
