@@ -55,7 +55,7 @@ function Cart() {
                 </p>
                 <Link className="w-full justify-end flex" to="/checkout">
                 <button
-                onClick={()=>{}}
+                //onClick={()=>{}}
                 className='font-semibold w-[300px] py-2 px-4 rounded-sm bg-custom-blue text-white flex items-center justify-center gap-2 hover:text-gray-300 trasnsition duration-500'
                 >
                   <MdShoppingCart size={20}/>

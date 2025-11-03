@@ -16,6 +16,8 @@ function Checkout() {
     ]
     useEffect(()=>{
         dispatch(getUserAddresses())
+        console.log("Checkout render oldu");
+
     },[dispatch])
   return (
     <div className='py-14 min-h-[calc(100vh-100px)]'>

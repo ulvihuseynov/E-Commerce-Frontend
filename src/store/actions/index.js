@@ -160,7 +160,14 @@ export const addUpdateUserAddress=(sendData,toast,addressId,setOpenAddressModal)
         dispatch({type:"BUTTON_LOADER"});
         console.log(sendData)
       try {
+        if (!addressId) {
     const {data}=await api.post("/addresses",sendData)
+            
+        } else {
+   await api.put(`/addresses/${addressId}`,sendData)
+            
+        }
+        dispatch(getUserAddresses())
     toast.success("Address saved successfully");
     dispatch({type:"IS_SUCCESS"})
 

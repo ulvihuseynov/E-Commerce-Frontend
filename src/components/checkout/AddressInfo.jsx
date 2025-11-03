@@ -12,6 +12,8 @@ function AddressInfo({address}) {
     const addNewAddressHandler=()=>{
         setSelectedAddress("");
         setOpenAddressModal(true)
+        console.log("AddressInfo render oldu");
+
     }
     const noAddressExist=!address || address.length==0;
     const {isLoading,btnLoader}=useSelector(state=>state.errors)
@@ -59,6 +61,7 @@ function AddressInfo({address}) {
                                           className='px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition-all cursor-pointer'>Add more</button>
                                 </div>
                             )
+                            
                         }
                        </>
                     )
