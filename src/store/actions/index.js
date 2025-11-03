@@ -173,3 +173,29 @@ export const addUpdateUserAddress=(sendData,toast,addressId,setOpenAddressModal)
     
 }
 }
+
+
+export const getUserAddresses =()=> async (dispatch,getState)=>{
+    try {
+        dispatch({type:"IS_FETCHING"})
+    const {data}= await api.get(`/addresses`);
+    dispatch({
+        type:"USER_ADDRESSES",payload:data});
+        dispatch({type:"IS_SUCCESS"})
+
+    } catch (error) {
+        console.log(error)
+        dispatch({type:"IS_ERROR",
+            payload:error?.response?.data?.message || "Failed to fetched user addresses",
+        })
+
+    }
+}
+
+export const selectUserCheckOutAddress=(address)=>{
+
+    return {
+        type:"SELECT_CHECKOUT_ADDRESS",
+        payload:address
+    }
+}
